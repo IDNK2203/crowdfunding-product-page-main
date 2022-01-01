@@ -1,0 +1,6 @@
+
+Fix overlay styling _/
+Style modal rewards indicator & stuff_/
+style form _-/ number input
+style element state
+add styles of larger screen sizes

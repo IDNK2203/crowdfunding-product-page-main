@@ -1,0 +1,101 @@
+1. CSS class toggle
+
+Concepts
+----
+condition rendering, State,
+
+Procedure
+----
+a. create a state called menuclosed
+b. on user click toogle the value of menuclosed (true/false) boolean
+c. use an if statement to check if the value of menuclosed and set the 
+class in the template accordingly
+
+when an event listener causes a State change is used as a trigger to run an indirect callback
+
+
+/////////////////////////////////////////////////////
+2. toggle the class of a child component by connection 
+the it's class to a state passed as a prop to the child component
+
+concept
+-----
+Props, State, Lifting up State, Composition
+
+Procedure
+----
+a. render modal at default closed state buy passing the modal content 
+component as a prop to the modal component
+b. on click of btn-A toggle css class of modal 
+c. on click of btn-B toggle css class of modal
+
+
+/////////////////////////////////////////////////////
+3. Radio buttion selection mechanism
+
+concept
+-----
+State, Lifting up State, Element attribute(ID), DOM Traversing
+
+Using Global state management with context API
+
+Procedure
+----
+a. create a state called element-ID and give a default ID
+b. on event trigger set the value of the state to a unqiue element ID
+c. create a expression on individual elements to check if element 
+Unique ID is equal to state value and toggle element properties as 
+necessary.
+
+
+/////////////////////////////////////////////////////
+4.Trigger state change in one component from another component 
+(Technical Requirement)
+
+concept
+-----
+
+UseEffect Hook, State, Props, handling events
+
+Procedure
+-----
+a. set state-A to a prop(state)  whenever the prop (state) changes the 
+state-A changes .
+b. this can be used to trigger state change from one component(parent) 
+to another component(child)
+
+
+///////////////////////////////////////////////////////
+5. handle form submission
+
+Concepts
+-----
+controlled Inputs, Handling events 
+
+---
+
+Bookmark functionality Requirement
+
+template structure
+button container
+  button element
+  p element [label]
+
+functions
+call bookmark handler on event trigger
+  display bookmark prompt page prompt
+  toggle bookmark-btn component state to bookmaerk for 3sec and then
+  toogle back
+
+
+changing element properties via API call
+
+check if page has been bookmarked if yes activate bookmark class
+on click active browser Bookmark API and request to bookmark page 
+
+Turns out its not possible to bookmark a page in js or retrieve a 
+list of bookmarked pages thus there is also no way to know if a component.
+has been broken.
+
+
+<svg class="icon" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><circle fill="#2F2F2F" cx="28" cy="28" r="28"></circle><path fill="#B1B1B1" d="M23 19v18l5-5.058L33 37V19z"></path></g></svg>
