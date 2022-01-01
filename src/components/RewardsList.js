@@ -1,4 +1,4 @@
-import { useState } from "react/cjs/react.development";
+import { useState } from "react";
 import ProjectModal from "./ProjectModal";
 import PrimaryBtn from "./PrimaryBtn";
 import MCRewards from "./MCRewards";

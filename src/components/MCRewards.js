@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react/cjs/react.development";
+import { useEffect, useState } from "react";
 import icon_close_modal from "../images/icon-close-modal.svg";
 function MCRewards({ handleModaltoggle, rID, handleSuccessModaltoggle }) {
   // can't seem to change value of a state with set state.
