@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import icon_close_modal from "../images/icon-close-modal.svg";
+import { Context } from "../Store";
+import PledgeForm from "./PledgeForm";
+
 function MCRewards({ handleModaltoggle, rID, handleSuccessModaltoggle }) {
-  // can't seem to change value of a state with set state.
+  const [state, dispatch] = useContext(Context);
   const [rewardId, setRewardId] = useState("");
-
-  // set state-A to a prop(state)  whenever the prop
-  // (state) changes the state-A changes
-  // Trigger state change in one component from another component
-
   useEffect(() => {
     setRewardId(rID);
   }, [rID]);
@@ -21,6 +19,11 @@ function MCRewards({ handleModaltoggle, rID, handleSuccessModaltoggle }) {
     e.preventDefault();
     handleModaltoggle(e);
     handleSuccessModaltoggle(e);
+    dispatch({
+      type: "SET_POSTS",
+      totalBacker: state.totalBacker + 1,
+      currrentAmtBacked: parseInt(e.target.elements.pledgeAmount.value),
+    });
   };
 
   return (
@@ -72,6 +75,9 @@ function MCRewards({ handleModaltoggle, rID, handleSuccessModaltoggle }) {
                 product updates via email.
               </p>
             </div>
+            {rewardId === 0 && (
+              <PledgeForm min={0} handler={handlePledgeForm}></PledgeForm>
+            )}
           </li>
           <li
             className={
@@ -107,32 +113,9 @@ function MCRewards({ handleModaltoggle, rID, handleSuccessModaltoggle }) {
                 <span className="mc-rewards__quantity-value"> 101</span> left
               </p>
             </div>
-            <form
-              className={
-                rewardId === 25
-                  ? "pledge-form pledge-form--open"
-                  : "pledge-form "
-              }
-              action="#"
-              method="post"
-              onSubmit={handlePledgeForm}
-            >
-              <div className="pledge-form__container">
-                <p className="pledge-form__text">Enter Your Pledge</p>
-                <div className="pledge-form__main">
-                  <input
-                    type="number"
-                    className="pledge-form__num-input"
-                    id="pledge"
-                    min={25}
-                    placeholder={25}
-                  />
-                  <button type={"submit"} className={"btn"}>
-                    continue
-                  </button>
-                </div>
-              </div>
-            </form>
+            {rewardId === 25 && (
+              <PledgeForm min={25} handler={handlePledgeForm}></PledgeForm>
+            )}
           </li>
           <li
             className={
@@ -168,33 +151,9 @@ function MCRewards({ handleModaltoggle, rID, handleSuccessModaltoggle }) {
                 <span className="mc-rewards__quantity-value"> 64</span> left
               </p>
             </div>
-            <form
-              className={
-                rewardId === 75
-                  ? "pledge-form pledge-form--open"
-                  : "pledge-form "
-              }
-              action="#"
-              method="post"
-              onSubmit={handlePledgeForm}
-            >
-              <div className="pledge-form__container">
-                <p className="pledge-form__text">Enter Your Pledge</p>
-
-                <div className="pledge-form__main">
-                  <input
-                    type="number"
-                    className="pledge-form__num-input"
-                    id="pledge"
-                    min={75}
-                    placeholder={75}
-                  />
-                  <button type={"submit"} className={"btn"}>
-                    continue
-                  </button>
-                </div>
-              </div>
-            </form>
+            {rewardId === 75 && (
+              <PledgeForm min={75} handler={handlePledgeForm}></PledgeForm>
+            )}
           </li>
           <li className={"mc-rewards__item mc-rewards__item--oos"}>
             <div className="mc-rewards__main">

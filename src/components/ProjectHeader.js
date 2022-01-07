@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Project_logo from "../images/logo-mastercraft.svg";
 import Icon_Bookmark from "../images/icon-bookmark.svg";
 import Icon_Bookmarked from "../images/icon-bookmarked.svg";
@@ -8,12 +8,7 @@ import MCRewards from "./MCRewards";
 import MCSuccess from "./MCSuccess";
 
 function ProjectHeader() {
-  const [ModalOpened, setModalOpened] = useState(false);
   const [Bookmark, setBookmark] = useState(false);
-
-  const handleModaltoggle = (e) => {
-    setModalOpened(!ModalOpened);
-  };
 
   const handleBookmark = (e) => {
     const value =
@@ -35,26 +30,38 @@ function ProjectHeader() {
     setSuccessModalOpened(!SuccessModalOpened);
   };
 
+  useEffect(() => {
+    if (RewardModalOpened || SuccessModalOpened) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [RewardModalOpened, SuccessModalOpened]);
+
   return (
     <>
-      <ProjectModal
-        id="Rewards"
-        handleModaltoggle={handleSuccessModaltoggle}
-        ModalOpened={SuccessModalOpened}
-        component={<MCSuccess handleModaltoggle={handleSuccessModaltoggle} />}
-      ></ProjectModal>
+      {SuccessModalOpened && (
+        <ProjectModal
+          id="Rewards"
+          handleModaltoggle={handleSuccessModaltoggle}
+          ModalOpened={SuccessModalOpened}
+          component={<MCSuccess handleModaltoggle={handleSuccessModaltoggle} />}
+        ></ProjectModal>
+      )}
 
-      <ProjectModal
-        id="success"
-        handleModaltoggle={handleRewardModaltoggle}
-        ModalOpened={RewardModalOpened}
-        component={
-          <MCRewards
-            handleModaltoggle={handleRewardModaltoggle}
-            handleSuccessModaltoggle={handleSuccessModaltoggle}
-          />
-        }
-      ></ProjectModal>
+      {RewardModalOpened && (
+        <ProjectModal
+          id="success"
+          handleModaltoggle={handleRewardModaltoggle}
+          ModalOpened={RewardModalOpened}
+          component={
+            <MCRewards
+              handleModaltoggle={handleRewardModaltoggle}
+              handleSuccessModaltoggle={handleSuccessModaltoggle}
+            />
+          }
+        ></ProjectModal>
+      )}
 
       <div className="project-header">
         <div className="project-header__container">
@@ -87,7 +94,6 @@ function ProjectHeader() {
               <button
                 onClick={handleBookmark}
                 className="btn btn--flex btn--image"
-                handler={handleModaltoggle}
               >
                 <img src={!Bookmark ? Icon_Bookmark : Icon_Bookmarked} alt="" />
                 <span

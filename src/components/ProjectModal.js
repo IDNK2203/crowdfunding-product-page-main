@@ -4,23 +4,13 @@ function ProjectMOdal({ component, ModalOpened, handleModaltoggle }) {
   useEffect(() => {
     if (ModalOpened) {
       window.scrollTo(0, 0);
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
     }
   }, [ModalOpened, component]);
 
   return (
     <>
-      <div
-        onClick={handleModaltoggle}
-        className={ModalOpened ? "overlay" : "overlay model--closed"}
-      ></div>
-      <div
-        className={
-          ModalOpened ? "project-modal" : "project-modal model--closed"
-        }
-      >
+      <div onClick={handleModaltoggle} className={"overlay"}></div>
+      <div className={"project-modal"}>
         <div className="project-modal__container">{component}</div>
       </div>
     </>

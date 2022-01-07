@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import ProjectModal from "./ProjectModal";
 import PrimaryBtn from "./PrimaryBtn";
 import MCRewards from "./MCRewards";
 import MCSuccess from "./MCSuccess";
+
 // This component is responsible its own state
 function RewardsList() {
   const [rID, setrID] = useState("");
@@ -10,7 +11,7 @@ function RewardsList() {
   const [RewardModalOpened, setRewardModalOpened] = useState(false);
   const [SuccessModalOpened, setSuccessModalOpened] = useState(false);
   const handleRewardModaltoggle = (e) => {
-    setrID(parseInt(e.target.parentElement.id));
+    setrID(parseInt(e.target.parentElement.parentElement.id));
     setRewardModalOpened(!RewardModalOpened);
   };
 
@@ -18,27 +19,38 @@ function RewardsList() {
     setSuccessModalOpened(!SuccessModalOpened);
   };
 
+  useEffect(() => {
+    if (RewardModalOpened || SuccessModalOpened) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [RewardModalOpened, SuccessModalOpened]);
+
   return (
     <>
-      <ProjectModal
-        id="Rewards"
-        handleModaltoggle={handleSuccessModaltoggle}
-        ModalOpened={SuccessModalOpened}
-        component={<MCSuccess handleModaltoggle={handleSuccessModaltoggle} />}
-      ></ProjectModal>
-
-      <ProjectModal
-        id="success"
-        handleModaltoggle={handleRewardModaltoggle}
-        ModalOpened={RewardModalOpened}
-        component={
-          <MCRewards
-            rID={rID}
-            handleModaltoggle={handleRewardModaltoggle}
-            handleSuccessModaltoggle={handleSuccessModaltoggle}
-          />
-        }
-      ></ProjectModal>
+      {SuccessModalOpened && (
+        <ProjectModal
+          id="Rewards"
+          handleModaltoggle={handleSuccessModaltoggle}
+          ModalOpened={SuccessModalOpened}
+          component={<MCSuccess handleModaltoggle={handleSuccessModaltoggle} />}
+        ></ProjectModal>
+      )}
+      {RewardModalOpened && (
+        <ProjectModal
+          id="success"
+          handleModaltoggle={handleRewardModaltoggle}
+          ModalOpened={RewardModalOpened}
+          component={
+            <MCRewards
+              rID={rID}
+              handleModaltoggle={handleRewardModaltoggle}
+              handleSuccessModaltoggle={handleSuccessModaltoggle}
+            />
+          }
+        ></ProjectModal>
+      )}
       <ul className="project-reward__list">
         <li className="project-reward__item" id="25">
           <div className="project-reward__flex-blox">

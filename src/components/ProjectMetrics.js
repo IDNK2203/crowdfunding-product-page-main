@@ -1,15 +1,22 @@
+import { useContext } from "react";
+import { Context } from "../Store";
+
 function ProjectMetrics() {
+  const [state] = useContext(Context);
   return (
     <div className="project-metrics">
       <div className="project-metrics__container">
         <ul className="project-metrics__list">
           <div className="project-metrics__item">
-            <h3 className="project-metrics__value"> $89,914 </h3>
+            <h3 className="project-metrics__value">{`$${state.currrentAmtBacked}`}</h3>
             <p className="project-metrics__text">of $100,000 backed</p>
             <div className="project-metrics__divider"></div>
           </div>{" "}
           <div className="project-metrics__item">
-            <h3 className="project-metrics__value"> 5,007 </h3>
+            <h3 className="project-metrics__value">
+              {" "}
+              {`$${state.totalBacker}`}{" "}
+            </h3>
             <p className="project-metrics__text">total backers</p>
             <div className="project-metrics__divider"></div>
           </div>{" "}
@@ -20,13 +27,20 @@ function ProjectMetrics() {
           </div>
         </ul>
         <div className="project-metrics__Progress-bar-con">
-          <progress
-            className="project-metrics__Progress-bar"
-            value="3333"
-            max="10000"
-          >
-            33%
-          </progress>
+          <div class="progress">
+            <div
+              style={{
+                width: `${Math.round(
+                  (state.currrentAmtBacked / 100000) * 100
+                )}%`,
+              }}
+              className="progress-bar"
+              role="progressbar"
+              aria-valuenow="75"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            ></div>
+          </div>
         </div>
       </div>
     </div>
